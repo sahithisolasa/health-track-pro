@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Track Pro | AI Analysis</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="title-container">
+        <h1>AI Health Risk Assessment Dashboard</h1>
+        <p>Personalized Health & Wellness Engine</p>
+    </div>
+</header>
+
+<main class="glass-panel">
+
+<form action="/predict" method="post">
+
+<div class="columns">
+
+    <!-- Patient Info -->
+    <div class="column">
+        <h3><i class="fa-solid fa-user"></i> Patient Info</h3>
+
+        <label>Age</label>
+        <input type="number" name="Age" placeholder="e.g. 25" required>
+
+        <label>Gender</label>
+        <div class="pill-group">
+            <input type="radio" id="male" name="Gender" value="Male" hidden required>
+            <label for="male" class="pill">Male</label>
+
+            <input type="radio" id="female" name="Gender" value="Female" hidden>
+            <label for="female" class="pill">Female</label>
+        </div>
+
+        <label>Weight (kg)</label>
+        <input type="number" name="Weight" placeholder="e.g. 70" required>
+
+        <label>Body Temp (°F)</label>
+        <input type="number" step="0.1" name="BodyTemperature" placeholder="e.g. 98.6" required>
+    </div>
+
+    <!-- Clinical Data -->
+    <div class="column">
+        <h3><i class="fa-solid fa-stethoscope"></i> Clinical Data</h3>
+
+        <label>Heart Rate (bpm)</label>
+        <input type="number" name="HeartRate" placeholder="e.g. 75" required>
+
+        <label>Systolic BP</label>
+        <input type="number" name="SystolicPressure" required>
+
+        <label>Diastolic BP</label>
+        <input type="number" name="DiastolicPressure" required>
+
+        <label>Current Symptoms</label>
+        <input type="text" name="Symptoms" placeholder="e.g. Headache, Fatigue or None" required>
+
+        <label>Medical History</label>
+        <input type="text" name="MedicalHistory" placeholder="e.g. Diabetes, Asthma or None" required>
+    </div>
+
+    <!-- Lifestyle -->
+    <div class="column">
+        <h3><i class="fa-solid fa-person-running"></i> Lifestyle</h3>
+
+        <label>Smoker?</label>
+        <div class="pill-group">
+            <input type="radio" id="smokeYes" name="Smoker" value="Yes" hidden onclick="toggleSmoking(true)" required>
+            <label for="smokeYes" class="pill">Yes</label>
+
+            <input type="radio" id="smokeNo" name="Smoker" value="No" hidden onclick="toggleSmoking(false)">
+            <label for="smokeNo" class="pill">No</label>
+        </div>
+
+        <div id="smokingDaysField" style="display:none;">
+            <label>Days since started smoking (approx)</label>
+            <input type="number" name="SmokingDays" placeholder="e.g. 365">
+        </div>
+
+        <label>Drinker?</label>
+        <div class="pill-group">
+            <input type="radio" id="drinkYes" name="Drinker" value="Yes" hidden onclick="toggleDrinking(true)" required>
+            <label for="drinkYes" class="pill">Yes</label>
+
+            <input type="radio" id="drinkNo" name="Drinker" value="No" hidden onclick="toggleDrinking(false)">
+            <label for="drinkNo" class="pill">No</label>
+        </div>
+
+        <div id="drinkingDaysField" style="display:none;">
+            <label>Days since started drinking (approx)</label>
+            <input type="number" name="DrinkingDays" placeholder="e.g. 730">
+        </div>
+
+        <label>Exercise Frequency</label>
+        <input type="number" name="Exercise" placeholder="e.g. 3 days/week" required>
+
+        <label>Sleep (Hours/Night)</label>
+        <input type="number" name="SleepHours" placeholder="e.g. 7" required>
+
+        <label>Overall Lifestyle</label>
+        <select name="Lifestyle" required>
+            <option value="">Select an option</option>
+            <option value="Active">Active</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Sedentary">Sedentary</option>
+        </select>
+    </div>
+
+</div>
+
+<div class="submit-container">
+    <button class="generate-btn">Generate AI Health Report</button>
+</div>
+
+</form>
+</main>
+
+<script>
+function toggleSmoking(show) {
+    document.getElementById("smokingDaysField").style.display = show ? "block" : "none";
+}
+function toggleDrinking(show) {
+    document.getElementById("drinkingDaysField").style.display = show ? "block" : "none";
+}
+</script>
+
+</body>
+</html>

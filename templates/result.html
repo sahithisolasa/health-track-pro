@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Track Pro | Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+<div class="overlay">
+
+    <div class="glass-card result-card">
+
+        <h1 class="result-title">Analysis Complete</h1>
+        <p class="result-sub">Here is your personalized AI health breakdown</p>
+
+        <!-- Quick Vitals -->
+        <h3 class="section-title">
+            <i class="fas fa-chart-line"></i> Quick Vitals Analysis
+        </h3>
+
+        <div class="vitals-grid">
+            <div class="vital-card orange">
+                <span>BLOOD PRESSURE</span>
+                <h2>{{ systolic }}/{{ diastolic }}</h2>
+            </div>
+
+            <div class="vital-card green">
+                <span>HEART RATE</span>
+                <h2>{{ heart_rate }} bpm</h2>
+            </div>
+
+            <div class="vital-card green">
+                <span>SLEEP DURATION</span>
+                <h2>{{ sleep }} hrs</h2>
+            </div>
+        </div>
+
+        <!-- AI REPORT -->
+        <h3 class="section-title">
+            <i class="fas fa-robot"></i> AI Health Report
+        </h3>
+
+        <div class="report-card">
+            <strong>General Assessment</strong>
+            <p>{{ report }}</p>
+        </div>
+
+        <div class="report-card">
+            <strong>Recommendations</strong>
+            <p>{{ suggestions }}</p>
+        </div>
+
+        <div class="report-card">
+            <strong>Habit Adjustments</strong>
+            <p>{{ habit }}</p>
+        </div>
+
+        <div class="report-card">
+            <strong>Dietary Plan</strong>
+            <p>{{ food }}</p>
+        </div>
+
+        <div class="result-buttons">
+    <a href="/" class="btn-secondary">
+        <i class="fas fa-redo"></i> Run Another Test
+    </a>
+
+    <button onclick="printReport()" class="btn-primary">
+        <i class="fas fa-print"></i> Print Report
+    </button>
+</div>
+
+    </div>
+
+</div>
+<script>
+function printReport() {
+    window.print();
+}
+</script>
+</body>
+</html>
