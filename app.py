@@ -1,21 +1,34 @@
 import flask
 import pickle
+import os
+import gdown
 import pandas as pd
 
 app = flask.Flask(
     __name__,
     static_url_path='/static',
-    static_folder='templates',   # CSS inside templates
+    static_folder='templates',
     template_folder='templates'
 )
 
-# Load model
-with open('model/model.pkl', 'rb') as file:
+MODEL_PATH = "model/model.pkl"
+MODEL_URL = "https://drive.google.com/uc?id=1f3aZzuHau_0j84rv8w0FnL9Iy58hBre-"
+
+def download_model():
+    if not os.path.exists(MODEL_PATH):
+        os.makedirs("model", exist_ok=True)
+        print("Downloading model...")
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False, fuzzy=True)
+
+download_model()
+
+with open(MODEL_PATH, 'rb') as file:
     pipeline = pickle.load(file)
 
 @app.route('/')
 def home():
     return flask.render_template('index.html')
+
 @app.route('/predict', methods=['POST'])
 def predict():
     try:
@@ -38,7 +51,6 @@ def predict():
 
         input_df = pd.DataFrame(input_data)
 
-        # Encode categorical values
         input_df['Gender'] = input_df['Gender'].map({'Male': 1, 'Female': 0})
         input_df['Smoker'] = input_df['Smoker'].map({'Yes': 1, 'No': 0})
         input_df['Drinker'] = input_df['Drinker'].map({'Yes': 1, 'No': 0})
