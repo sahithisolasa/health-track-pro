@@ -12,7 +12,7 @@ app = flask.Flask(
 )
 
 MODEL_PATH = "model/model.pkl"
-MODEL_URL = "https://drive.google.com/uc?id=1f3aZzuHau_0j84rv8w0FnL9Iy58hBre-"
+MODEL_URL = "https://drive.google.com/uc?id=1U3kYKYVRPl0gMF_CIoSMU4TXpu1N6AP7"
 
 def download_model():
     if not os.path.exists(MODEL_PATH):
